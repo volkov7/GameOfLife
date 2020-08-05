@@ -52,20 +52,47 @@ public class GameOfLife {
 		}
 		return newGen;
 	}
+
+	public static int countAlive(char[][] gen, int size) {
+		int alive = 0;
+
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (gen[i][j] == 'O') {
+					alive++;
+				}
+			}
+		}
+		return alive;
+	}
+
+	public  static void clearScreen() {
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
 		int size = sc.nextInt();
-		int seed = sc.nextInt();
-		int countGenerations = sc.nextInt();
+		int countGenerations = 12;
 
 		char[][] currentGen = new char[size][size];
-		Random random = new Random(seed);
+		Random random = new Random();
 		fillGeneration(currentGen, random, size);
 		for (int count = 0; count < countGenerations; count++) {
+			System.out.println("Generation #" + (count + 1));
+			System.out.println("Alive: " + countAlive(currentGen, size));
+			clearScreen();
+			printGeneration(currentGen, size);
 			currentGen = createNewGen(currentGen, size);
 		}
-		printGeneration(currentGen, size);
 		sc.close();
 	}
 }
