@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.IOException;
 
 public class GameOfLife {
 	public static void fillGeneration(char[][] generation, Random random, int size) {
