@@ -4,9 +4,7 @@ import java.awt.*;
 
 class GridsCanvass extends JPanel {
 	int width, height;
-
 	int rows;
-
 	int cols;
 
 	GridsCanvass(int w, int h, int r, int c) {
@@ -23,14 +21,14 @@ class GridsCanvass extends JPanel {
 		// draw the rows
 		int rowHt = height / (rows);
 		// System.out.println(rowHt);
-		for (i = 0; i < rows; i++)
-		g.drawLine(0, i * rowHt, width, i * rowHt);
+		for (i = 0; i <= rows + 1; i++)
+			g.drawLine(0, i * rowHt, width, i * rowHt);
 
 		// draw the columns
 		int rowWid = width / (cols);
 		// System.out.println(rowWid);
-		for (i = 0; i < cols; i++)
-		g.drawLine(i * rowWid, 0, i * rowWid, height);
+		for (i = 0; i <= cols + 1; i++)
+			g.drawLine(i * rowWid, 0, i * rowWid, height);
 	}
 }
 
@@ -43,7 +41,7 @@ public class GameOfLife extends JFrame {
 		setSize(500, 500);
 		setLocationRelativeTo(null);
 		
-		int size = 30;
+		int size = 32;
 		final int countOfGenerations = 100;
 		JPanel[][] currentGen = null;
 		Random random = new Random();
